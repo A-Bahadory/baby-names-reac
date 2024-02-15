@@ -3,93 +3,51 @@ import allCountryScores from "./scores";
 
 function App() {
   return (
-    <div>
-      <h1>All Country Scores:</h1>
-      <div
-        style={{
-          border: "solid green 1rem",
-        }}
-      >
-        test.div
-      </div>
-      <ul
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          background: "yellow",
-          color: "black",
-          gap: "2rem",
-          border: "solid red 1rem",
-        }}
-      >
-        {GetCountryName(allCountryScores)}
-      </ul>
-
-      <h1>All Country Scores:</h1>
-      <ul>{GetCountryScores(allCountryScores)}</ul>
+    <div
+      style={{
+        border: "solid white 4px",
+      }}
+    >
+      <h1>All Country Scores</h1>
+      <div>{Getname(allCountryScores)}</div>
     </div>
   );
 }
 
-// function Getname(scores) {
-//   return (
-//     <>
-//       {scores.map((country, index) => (
-//         <li key={index}>
-//           High Scores for {country.name}:
-//           <ul>
-//             {country.scores.map((score, scoreIndex) => (
-//               <div key={scoreIndex}>
-//                 {score.n}: {score.s}
-//               </div>
-//             ))}
-//           </ul>
-//         </li>
-//       ))}
-//     </>
-//   );
-// }
+function Getname(scores) {
+  const sortedCountries = scores.slice().sort((a, b) => {
+    // Compare the country names
+    return a.name.localeCompare(b.name);
+  });
 
-// function App() {
-//   return (
-//     <div>
-//       <h1>All Country Names:</h1>
-//       <ul>
-//         <GetCountryName scores={allCountryScores} />
-//       </ul>
-
-//       <h1>All Country Scores:</h1>
-//       <ul>
-//         <GetCountryScores scores={allCountryScores} />
-//       </ul>
-//     </div>
-//   );
-// }
-
-function GetCountryName(scores) {
   return (
     <>
-      {scores.map((country, index) => (
-        <li key={index}>{country.name}</li>
-      ))}
-    </>
-  );
-}
-
-function GetCountryScores(scores) {
-  return (
-    <>
-      {scores.map((country, index) => (
-        <li key={index}>
-          High Scores for {country.name}:
-          <ul>
+      {sortedCountries.map((country, index) => (
+        <div
+          style={{
+            border: "solid red 3px",
+            padding: "20px",
+            margin: "12px",
+          }}
+          key={index}
+        >
+          <h2>High Scores: {country.name}:</h2>
+          <div>
             {country.scores.map((score, scoreIndex) => (
-              <div key={scoreIndex}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  padding: "10px",
+                  border: "solid white 1px",
+                }}
+                key={scoreIndex}
+              >
                 {score.n}: {score.s}
               </div>
             ))}
-          </ul>
-        </li>
+          </div>
+        </div>
       ))}
     </>
   );
